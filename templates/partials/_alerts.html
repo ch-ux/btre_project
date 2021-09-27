@@ -1,0 +1,26 @@
+{% if messages %}
+<!--we want to loop through messages if there are any-->
+    {% for message in messgaes %}
+    <!--we put some markup now-->
+        <div id="messges" class="container">
+            <!--<div class="alert alert-danger"></div>...replace danger-->
+            <div class="alert alert-{{ message.tags }} alert-dismissable text-center" role="alert">
+                <!--if its a dismisable alert then we write button-->
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                </button>
+                <strong>
+                    <!--to check the message is an error-->
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <!--if thats true we wanna output the word error-->
+                        Error:
+                    {% else %}
+                        {{ message.tags|title }}
+
+                    {% endif %}
+                </strong>
+                <!-- actual message -->
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
